@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>My only love 💘</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 40px;
+      border-radius: 25px;
+      max-width: 420px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      animation: aparecer 1.2s ease;
+      z-index: 2;
+    }
+
+    h1 {
+      color: #e63946;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #444;
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    button {
+      margin-top: 25px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 30px;
+      background: #e63946;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(230,57,70,0.4);
+    }
+
+    /* ===== MODAL OPTIMIZADO PARA TEXTO LARGO ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      z-index: 5;
+    }
+
+    .modal-contenido {
+      background: #fff;
+      width: 90%;
+      max-width: 500px; /* Ancho máximo para que no se vea gigante */
+      margin: 10vh auto;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      animation: aparecer 0.4s ease;
+      max-height: 70vh; /* Altura máxima para que no se salga de la pantalla */
+      overflow-y: auto;  /* Permite hacer scroll si el texto es muy largo */
+      position: relative;
+    }
+
+    .cerrar {
+      position: sticky;
+      top: 0;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      color: #e63946;
+      line-height: 1;
+    }
+
+    /* ===== CORAZONES ===== */
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 24px;
+      animation: flotar 6s linear infinite;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes flotar {
+      0% { transform: translateY(0) scale(1); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(-110vh) scale(1.4); opacity: 0; }
+    }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Te amo mi amor 💘</h1>
+    <p>
+      Happy Valentine's Day.<br>
+      "There's nobody on these streets... <br>
+      Ain't no other way that I can spend it."
+    </p>
+
+    <button onclick="abrirCarta()">Ver la cartita 💌</button>
+  </div>
+
+  <div class="modal" id="modalCarta">
+    <div class="modal-contenido">
+      <span class="cerrar" onclick="cerrarCarta()">&times;</span>
+      <h2>Para ti 💘</h2>
+      <p id="mensajeCarta" style="white-space: pre-wrap; text-align: left;"></p>
+    </div>
+  </div>
+
+  <script>
+    // ESCRIBE TU CARTA AQUÍ ABAJO:
+    // Puedes usar saltos de línea normales presionando Enter.
+    const miCartaLarga = `Amor mío,
+
+Hoy no es solo San Valentín, es uno de esos días que me recuerdan por qué elegirte ha sido lo mas lindo que he hecho, desde que llegaste, todo tiene otro sentido, las risas duran más, hasta los días difíciles pesan menos porque sé que estás ahí.
+
+No digo que lo nuestro sea perfecto, pero siempre me esfuerzo por ser mejor para ti,  te amo porque contigo puedo ser yo, sin miedo, sin tener que fingir fuerza cuando solo quiero descansar.
+
+Gracias por tu paciencia, por tu forma de cuidarme , por estar incluso cuando no sabes exactamente qué decir. Gracias por cada detalle, por cada abrazo que arregla más de lo que imaginas, por cada mirada que me recuerda que no estoy sola.
+
+Contigo aprendí que el amor no solo se siente, también se construye, con lealtad, con risas y con todo el amor que nos tenemos, yo quiero seguir construyendo contigo, paso a paso, sin prisas, pero sin pausas.
+
+No sé qué nos traerá el futuro, pero sí sé que quiero estar contigo toda mi vida. Si el camino se pone largo, que sea de tu mano, si el mundo se pone ruidoso, que tu voz sea mi calma, y si alguna vez dudamos, que el amor que hoy sentimos nos recuerde por qué empezamos.
+
+Feliz San Valentín, mi bebechito lindo.
+Te amo con todo mi corazón.
+ 💘`;
+
+    function abrirCarta() {
+      // Usamos innerText para que respete los saltos de línea que hagas arriba
+      document.getElementById("mensajeCarta").innerText = miCartaLarga;
+      document.getElementById("modalCarta").style.display = "block";
+    }
+
+    function cerrarCarta() {
+      document.getElementById("modalCarta").style.display = "none";
+    }
+
+    // Cerrar el modal si se hace clic fuera de la cajita blanca
+    window.onclick = function(event) {
+      const modal = document.getElementById("modalCarta");
+      if (event.target == modal) {
+        cerrarCarta();
+      }
+    }
+
+    function crearCorazon() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.textContent = "💘";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = (Math.random() * 3 + 4) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+    setInterval(crearCorazon, 500);
+  </script>
+
+</body>
+</html>
